@@ -2,6 +2,18 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
 
+## Notes
+
+### Package Installations
+```
+ng add @angular/material
+ng add @ngrx/signals@latest
+npm install lodash
+npm install @types/lodash --save-dev
+npm install luxon
+npm install --save-dev @types/luxon
+```
+
 ## Development server
 
 To start a local development server, run:
