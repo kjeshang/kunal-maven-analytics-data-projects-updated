@@ -1,5 +1,5 @@
 // Jupyter Analysis Data Model
-export interface jupyterAnalysis {
+export interface JupyterAnalysis {
     id: number;
     name: string;
     description: string;
@@ -16,6 +16,6 @@ export interface jupyterAnalysis {
 }
 
 // Jupyter Analysis View Model
-export interface jupyterAnalysisView extends jupyterAnalysis {
+export interface JupyterAnalysisView extends JupyterAnalysis {
     nbViewerLink: string;
 }
