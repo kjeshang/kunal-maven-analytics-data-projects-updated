@@ -11,11 +11,23 @@
         <mat-divider />
         <div class="mt-2 flex flex-col space-y-2">
             <p>{{ item.description }}</p>
-            <ul class="flex flex-row items-center justify-evenly">
+            <p class="font-thin">Number of Records: {{ item.numRecords }}</p>
+            <p class="font-thin">Number of Fields: {{ item.numFields }}</p>
+            <p class="font-thin">Date Added: {{ item.dateAdded }}</p>
+            <ul class="mt-2 mb-3 flex flex-row items-center justify-evenly">
+                @for(subItem of item.fileTypes; track $index) {
+                    <li class="bg-gray-200 border-gray-400 rounded-xl p-2">{{ subItem }}</li>
+                }
                 @for(subItem of item.tags; track $index) {
                     <li class="bg-gray-200 border-gray-400 rounded-xl p-2">{{ subItem }}</li>
                 }
             </ul>
         </div>
+        <mat-divider />
     </mat-card-content>
+    <mat-card-actions class="flex items-center justify-center">
+        <a [href]="item.githubLink" target="_blank">
+            <button matButton="tonal">View on Github</button>
+        </a>
+    </mat-card-actions>
 </mat-card>
