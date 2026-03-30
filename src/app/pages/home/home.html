@@ -1,4 +1,14 @@
 <app-feature-container>
-    <p>home works!</p>
+    @if(jupyterAnalysisStore.isLoading()) {
+    <div class="m-4 p-4 flex flex-row items-center justify-center">
+        <mat-progress-spinner mode="indeterminate" />
+    </div>
+    }
+    @else {
+    <div class="m-4 p-4 grid grid-cols-1 sm:grid-cols-4 gap-6">
+        @for(item of jupyterAnalysisStore.jupyterAnalysisData(); track $index) {
+        <app-customcard [item]="item" />
+        }
+    </div>
+    }
 </app-feature-container>
-
