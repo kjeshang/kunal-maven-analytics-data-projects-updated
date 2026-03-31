@@ -20,6 +20,9 @@ export class Customcard {
    * Click card to open dialog window.
    */
   openAnalysisWindow(): void {
-    const dialogRef: MatDialogRef<Viewdialog, any> = this.dialog.open(Viewdialog);
+    const dialogRef: MatDialogRef<Viewdialog, any> = this.dialog.open(Viewdialog, {
+      width:"99vw",
+      height:"95vh"
+    });
   }
 }

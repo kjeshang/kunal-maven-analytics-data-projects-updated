@@ -43,6 +43,14 @@ export const JupyterAnalysisStore = signalStore(
                 isLoading: false,
                 jupyterAnalysisData: data,
             }))
+        },
+        /**
+         * Update selected jupyter analysis
+         */
+        async updateSelectedJupyterAnalysis(selectedJupyterAnalysis: JupyterAnalysis | undefined): Promise<void> {
+            patchState(store, (state: JupyterAnalysisState) => ({
+                selectedJupyterAnalysis: selectedJupyterAnalysis
+            }))
         }
     }))
 )
