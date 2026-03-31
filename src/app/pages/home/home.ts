@@ -10,12 +10,8 @@ import { Customcard } from '../../components/customcard/customcard';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
+export class Home {
 
   jupyterAnalysisStore = inject(JupyterAnalysisStore);
-
-  ngOnInit(): void {
-    console.log(this.jupyterAnalysisStore.jupyterAnalysisData());
-  }
 
 }
