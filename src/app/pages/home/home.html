@@ -7,7 +7,9 @@
     @else {
     <div class="m-4 p-4 grid grid-cols-1 sm:grid-cols-4 gap-6">
         @for(item of jupyterAnalysisStore.jupyterAnalysisData(); track $index) {
-        <app-customcard [item]="item" />
+        <div (click)="openAnalysisWindow(item)">
+            <app-customcard [item]="item" />
+        </div>
         }
     </div>
     }
