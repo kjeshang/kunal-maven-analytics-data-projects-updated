@@ -1,10 +1,19 @@
-<h2 mat-dialog-title>Delete all elements?</h2>
+<div class="flex flex-row items-center justify-between">
+  <h2 mat-dialog-title>{{ data.name }}</h2>
+  <mat-dialog-actions>
+    <button matIconButton mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</div>
+<div class="px-4">
+  <mat-divider />
+</div>
 <mat-dialog-content>
-  This will delete all elements that are currently on this page and cannot be undone.
-  {{ data.name }}
+  {{ data.description }}
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton mat-dialog-close>Cancel</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button matButton [mat-dialog-close]="true">Delete</button>
+  <a [href]="data.githubLink" target="_blank">
+    <button matButton="tonal">View on Github</button>
+  </a>
 </mat-dialog-actions>
