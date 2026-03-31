@@ -25,7 +25,8 @@ export class Home {
   openAnalysisWindow(item: JupyterAnalysis): void {
     this.jupyterAnalysisStore.updateSelectedJupyterAnalysis(item);
     const dialogRef: MatDialogRef<Viewdialog, any> = this.dialog.open(Viewdialog, {
-      width:"99vw",
+      width:"95vw",
+      maxWidth: '100vw',
       height:"95vh",
       data: item,
     });
