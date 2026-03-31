@@ -1,16 +1,19 @@
 <app-feature-container>
-    @if(jupyterAnalysisStore.isLoading()) {
-    <div class="m-4 p-4 flex flex-row items-center justify-center">
-        <mat-progress-spinner mode="indeterminate" />
-    </div>
-    }
-    @else {
-    <div class="m-4 p-4 grid grid-cols-1 sm:grid-cols-4 gap-6">
-        @for(item of jupyterAnalysisStore.jupyterAnalysisData(); track $index) {
-        <div (click)="openAnalysisWindow(item)">
-            <app-customcard [item]="item" />
+    <div class="m-4 p-4">
+        @if(jupyterAnalysisStore.isLoading()) {
+        <div class="flex flex-row items-center justify-center">
+            <mat-progress-spinner mode="indeterminate" />
+        </div>
+        }
+        @else {
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+            @for(item of jupyterAnalysisStore.jupyterAnalysisData(); track $index) {
+            <div (click)="openAnalysisWindow(item)">
+                <app-customcard [item]="item" />
+            </div>
+            }
         </div>
         }
     </div>
-    }
+
 </app-feature-container>
