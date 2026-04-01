@@ -1,5 +1,7 @@
 # KunalMavenAnalyticsDataProjectsUpdated
 
+[Click Here](https://kunal-maven-analytics-data-projects.netlify.app/) to access live version.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
 
 ## Notes
