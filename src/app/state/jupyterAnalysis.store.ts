@@ -15,6 +15,7 @@ type JupyterAnalysisState = {
     jupyterAnalysisData: JupyterAnalysis[];
     isLoading: boolean;
     query: string;
+    toggleAnalysisCompleted: boolean;
     selectedJupyterAnalysis: JupyterAnalysis | undefined;
 }
 
@@ -22,6 +23,7 @@ const initialJupyterAnalysisState: JupyterAnalysisState = {
     jupyterAnalysisData: [],
     isLoading: false,
     query: '',
+    toggleAnalysisCompleted: false,
     selectedJupyterAnalysis: undefined,
 }
 
@@ -54,6 +56,14 @@ export const JupyterAnalysisStore = signalStore(
             }));
         },
         /**
+         * Update "toggleAnalysisCompleted"
+         */
+        async updateToggleAnalysisCompletedFilter(toggleAnalysisCompleted: boolean): Promise<void> {
+            patchState(store, (state: JupyterAnalysisState) => ({
+                toggleAnalysisCompleted: toggleAnalysisCompleted
+            }));
+        },
+        /**
          * Update selected jupyter analysis
          */
         async updateSelectedJupyterAnalysis(selectedJupyterAnalysis: JupyterAnalysis | undefined): Promise<void> {
@@ -66,6 +76,7 @@ export const JupyterAnalysisStore = signalStore(
         {
             jupyterAnalysisData,
             query,
+            toggleAnalysisCompleted,
             selectedJupyterAnalysis,
         }
     ) => ({
@@ -73,8 +84,8 @@ export const JupyterAnalysisStore = signalStore(
          * Filter data based on name, description, data structure, filetypes, and tags using query filter.
          */
         filteredJupyterAnalysisData: computed(() => {
-            const data: JupyterAnalysis[] = chain(jupyterAnalysisData())
-                .filter((el: JupyterAnalysis) => 
+            let data: JupyterAnalysis[] = chain(jupyterAnalysisData())
+                .filter((el: JupyterAnalysis) =>
                     el.name.toLowerCase().includes(query().toLowerCase()) ||
                     el.description.toLowerCase().includes(query().toLowerCase()) ||
                     el.dataStructure.toLowerCase().includes(query().toLowerCase()) ||
@@ -82,6 +93,11 @@ export const JupyterAnalysisStore = signalStore(
                     el.tags.join(",").toLowerCase().includes(query().toLowerCase())
                 )
                 .value();
+            // If "toggleAnalysisCompleted" is true, then only completed projects will be displayed.
+            if (toggleAnalysisCompleted()) {
+                data = chain(data).filter((el: JupyterAnalysis) => el.analysisCompleted === toggleAnalysisCompleted()).value();
+                return data;
+            }
             return data;
         }),
         /**
@@ -90,7 +106,7 @@ export const JupyterAnalysisStore = signalStore(
         transformedJupyterAnalysisData: computed(() => {
             const data: JupyterAnalysisView = {
                 ...selectedJupyterAnalysis()!,
-                nbViewerLink: selectedJupyterAnalysis()!.githubLink.replace('github.com','nbviewer.org/github'),
+                nbViewerLink: selectedJupyterAnalysis()!.githubLink.replace('github.com', 'nbviewer.org/github'),
             };
             return data;
         })
