@@ -16,6 +16,14 @@ npm install luxon
 npm install --save-dev @types/luxon
 ```
 
+### Build Instructions
+1. Create `_redirects` file in public directory.
+2. Write the following in the `_redirects` file: `/* /index.html 200`.
+3. Run `ng build`.
+4. Link project to Netlify using Web Interface.
+5. Set publish directory to "dist/kunal-maven-analytics-data-projects-updated/browser" (i.e., dist/[Name of Project Repository]/browser).
+6. Click "Deploy" button.
+
 ## Development server
 
 To start a local development server, run:
