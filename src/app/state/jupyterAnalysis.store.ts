@@ -70,9 +70,6 @@ export const JupyterAnalysisStore = signalStore(
         }
     ) => ({
         filteredJupyterAnalysisData: computed(() => {
-            // https://nbviewer.org/github/kjeshang/KunalMavenAnalyticsDataPlayground/blob/main/LEGO_Sets/Analysis.ipynb
-            // https://github.com/kjeshang/KunalMavenAnalyticsDataPlayground/blob/main/LEGO_Sets/Analysis.ipynb
-            // github.com => nbviewer.org/github
             const data: JupyterAnalysis[] = chain(jupyterAnalysisData())
                 .filter((el: JupyterAnalysis) => el.name.toLowerCase().includes(query().toLowerCase()))
                 .value();
