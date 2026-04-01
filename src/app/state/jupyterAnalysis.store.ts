@@ -69,12 +69,24 @@ export const JupyterAnalysisStore = signalStore(
             selectedJupyterAnalysis,
         }
     ) => ({
+        /**
+         * Filter data based on name, description, data structure, filetypes, and tags using query filter.
+         */
         filteredJupyterAnalysisData: computed(() => {
             const data: JupyterAnalysis[] = chain(jupyterAnalysisData())
-                .filter((el: JupyterAnalysis) => el.name.toLowerCase().includes(query().toLowerCase()))
+                .filter((el: JupyterAnalysis) => 
+                    el.name.toLowerCase().includes(query().toLowerCase()) ||
+                    el.description.toLowerCase().includes(query().toLowerCase()) ||
+                    el.dataStructure.toLowerCase().includes(query().toLowerCase()) ||
+                    el.fileTypes.join(",").toLowerCase().includes(query().toLowerCase()) ||
+                    el.tags.join(",").toLowerCase().includes(query().toLowerCase())
+                )
                 .value();
             return data;
         }),
+        /**
+         * Transform selected jupyter analysis so that the Github link is converted to an Nbviewer link so that it can be displayed in an iframe.
+         */
         transformedJupyterAnalysisData: computed(() => {
             const data: JupyterAnalysisView = {
                 ...selectedJupyterAnalysis()!,
