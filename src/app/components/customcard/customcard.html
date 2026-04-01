@@ -15,7 +15,6 @@
             <p class="font-thin">Number of Records: {{ item.numRecords }}</p>
             <p class="font-thin">Number of Fields: {{ item.numFields }}</p>
             <p class="font-thin">Date Added: {{ item.dateAdded }}</p>
-            <p class="font-thin">Analysis Completed: {{ item.analysisCompleted }}</p>
             <ul class="mt-2 mb-3 flex flex-row items-center justify-evenly">
                 @for(subItem of item.fileTypes; track $index) {
                 <li class="bg-gray-200 border-gray-400 rounded-xl p-2">{{ subItem }}</li>
@@ -24,6 +23,17 @@
                 <li class="bg-gray-200 border-gray-400 rounded-xl p-2">{{ subItem }}</li>
                 }
             </ul>
+        </div>
+        <mat-divider />
+        <div class="pt-2 flex flex-col items-center justify-center">
+            <p>
+                @if(item.analysisCompleted) {
+                    Project Completed
+                }
+                @else {
+                    Project Incomplete
+                }
+            </p>
         </div>
     </mat-card-content>
 </mat-card>
