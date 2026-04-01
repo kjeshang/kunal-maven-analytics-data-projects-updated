@@ -28,7 +28,7 @@ export class Home {
       width:"95vw",
       maxWidth: '100vw',
       height:"95vh",
-      data: item,
+      data: this.jupyterAnalysisStore.transformedJupyterAnalysisData(),
     });
   }
 

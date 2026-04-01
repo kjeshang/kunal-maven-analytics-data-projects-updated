@@ -1,6 +1,6 @@
-import { inject } from "@angular/core";
+import { computed, inject } from "@angular/core";
 import { DbService } from "./db.service";
-import { JupyterAnalysis } from "./models"
+import { JupyterAnalysis, JupyterAnalysisView } from "./models"
 import {
     patchState,
     signalStore,
@@ -8,6 +8,7 @@ import {
     withMethods,
     withState,
 } from '@ngrx/signals';
+import { chain } from "lodash";
 
 
 type JupyterAnalysisState = {
@@ -45,6 +46,14 @@ export const JupyterAnalysisStore = signalStore(
             }))
         },
         /**
+         * Update query
+         */
+        async updateQueryFilter(query: string): Promise<void> {
+            patchState(store, (state: JupyterAnalysisState) => ({
+                query: query,
+            }));
+        },
+        /**
          * Update selected jupyter analysis
          */
         async updateSelectedJupyterAnalysis(selectedJupyterAnalysis: JupyterAnalysis | undefined): Promise<void> {
@@ -52,5 +61,29 @@ export const JupyterAnalysisStore = signalStore(
                 selectedJupyterAnalysis: selectedJupyterAnalysis
             }))
         }
+    })),
+    withComputed((
+        {
+            jupyterAnalysisData,
+            query,
+            selectedJupyterAnalysis,
+        }
+    ) => ({
+        filteredJupyterAnalysisData: computed(() => {
+            // https://nbviewer.org/github/kjeshang/KunalMavenAnalyticsDataPlayground/blob/main/LEGO_Sets/Analysis.ipynb
+            // https://github.com/kjeshang/KunalMavenAnalyticsDataPlayground/blob/main/LEGO_Sets/Analysis.ipynb
+            // github.com => nbviewer.org/github
+            const data: JupyterAnalysis[] = chain(jupyterAnalysisData())
+                .filter((el: JupyterAnalysis) => el.name.toLowerCase().includes(query().toLowerCase()))
+                .value();
+            return data;
+        }),
+        transformedJupyterAnalysisData: computed(() => {
+            const data: JupyterAnalysisView = {
+                ...selectedJupyterAnalysis()!,
+                nbViewerLink: selectedJupyterAnalysis()!.githubLink.replace('github.com','nbviewer.org/github'),
+            };
+            return data;
+        })
     }))
 )
