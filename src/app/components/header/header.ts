@@ -39,7 +39,7 @@ export class Header {
     const snackbarMessage: string = this.jupyterAnalysisStore.toggleAnalysisCompleted() ? "Toggled Completed Projects" : "Toggled All Projects";
     this._snackBar.open(snackbarMessage, 'Dismiss', {
       duration: 3000,
-      verticalPosition: 'top'
+      verticalPosition: 'bottom'
     });
   }
 }
