@@ -10,11 +10,9 @@
   <mat-divider />
 </div>
 <mat-dialog-content>
+  <p>If the notebook fails to load, the GitHub API may be rate-limited. Try the <strong>"View on GitHub"</strong> button.</p>
   @if(safeUrl) {
     <iframe [src]="safeUrl" width="100%" height="100%" frameborder="0"></iframe>
-  }
-  @else { 
-    <p>Unable to render Jupyter Notebook. Please Click on the "View on Github" button to view analysis.</p>
   }
 </mat-dialog-content>
 <mat-dialog-actions class="relative top-12">
